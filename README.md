@@ -25,8 +25,16 @@ Additionally, no effort has been made to make this work with Python 2. It is int
 The intent is, as far as possible, to allow this to build using
 
 ```shell
-$ python -m pip -r requirements.txt
+$ python -m pip install -r requirements.txt
 
+```
+
+## Running
+
+Presently it's just started via the simple
+
+```shell
+$ python ./FlatCAM.py
 ```
 
 ## Bugs
