@@ -1,5 +1,8 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
+from ObjectCollection import FlatCAMExcellon, FlatCAMGeometry
 from tclCommands.TclCommand import TclCommandSignaled
+from fcObjects.gerber import FlatCAMGerber
 
 
 class TclCommandMirror(TclCommandSignaled):
@@ -13,13 +16,13 @@ class TclCommandMirror(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('axis', str),
         ('box', str),
         ('dist', float)
@@ -31,7 +34,7 @@ class TclCommandMirror(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Opens an Excellon file.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object (Gerber or Excellon) to mirror.'),
             ('box', 'Name of object which act as box (cutout for example.)'),
             ('axis', 'Mirror axis parallel to the X or Y axis.'),

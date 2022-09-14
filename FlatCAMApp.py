@@ -3655,8 +3655,8 @@ class App(QObject):
 
         def make_docs():
             output = ''
-            import collections
-            od = collections.OrderedDict(sorted(commands.items()))
+            from collections import OrderedDict
+            od = OrderedDict(sorted(commands.items()))
             for cmd, val in od.iteritems():
                 #print cmd, '\n', ''.join(['~']*len(cmd))
                 output += cmd + ' \n' + ''.join(['~'] * len(cmd)) + '\n'

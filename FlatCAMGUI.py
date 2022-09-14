@@ -318,6 +318,9 @@ class FlatCAMGUI(QMainWindow):
         self.setWindowTitle(f"FlatCAM {version} - Development Version")
         self.show()
 
+    def showSelectedTab(self):
+        self.notebook.setCurrentIndex(1)
+
     def closeEvent(self, event):
         grect = self.geometry()
         self.geom_update.emit(grect.x(), grect.y(), grect.width(), grect.height(), self.splitter.sizes()[0])
@@ -327,7 +330,7 @@ class FlatCAMGUI(QMainWindow):
 class FlatCAMActivityView(QWidget):
 
     def __init__(self, parent=None):
-        super(FlatCAMActivityView, self).__init__(parent=parent)
+        super().__init__(parent=parent)
 
         self.setMinimumWidth(200)
 

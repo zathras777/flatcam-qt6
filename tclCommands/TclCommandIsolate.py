@@ -1,5 +1,7 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
+from fcObjects.gerber import FlatCAMGerber
 
 
 class TclCommandIsolate(TclCommandSignaled):
@@ -18,12 +20,12 @@ class TclCommandIsolate(TclCommandSignaled):
     aliases = ['isolate']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('dia',float),
         ('passes',int),
         ('overlap',float),
@@ -37,7 +39,7 @@ class TclCommandIsolate(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Creates isolation routing geometry for the given Gerber.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the source object.'),
             ('dia', 'Tool diameter.'),
             ('passes', 'Passes of tool width.'),

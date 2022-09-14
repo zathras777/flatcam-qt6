@@ -4,8 +4,10 @@ from PyQt6.QtCore import Qt, QVariant, QModelIndex, pyqtSignal, QAbstractItemMod
 from PyQt6.QtGui import QPixmap, QBrush
 from PyQt6.QtWidgets import QTreeView, QAbstractItemView
 
-from FlatCAMObj import *
+from FlatCAMObj import FlatCAMExcellon, FlatCAMCNCjob, FlatCAMGeometry
 import FlatCAMApp
+
+from fcObjects.gerber import FlatCAMGerber
 
 
 class KeySensitiveListView(QTreeView):
@@ -509,6 +511,7 @@ class ObjectCollection(QAbstractItemModel):
         FlatCAMApp.App.log.debug("Current: %s, Previous %s" % (str(current), str(previous)))
 
         try:
+            FlatCAMApp.App.log.debug("current.indexes = %s", current.indexes())
             obj = current.indexes()[0].internalPointer().obj
         except IndexError:
             FlatCAMApp.App.log.debug("on_list_selection_change(): Index Error (Nothing selected?)")
@@ -522,6 +525,7 @@ class ObjectCollection(QAbstractItemModel):
             return
 
         if obj:
+            FlatCAMApp.App.log.debug("obj = %s", obj)
             obj.build_ui()
 
     def on_item_activated(self, index):

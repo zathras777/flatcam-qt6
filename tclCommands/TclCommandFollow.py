@@ -1,5 +1,7 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
+from fcObjects.gerber import FlatCAMGerber
 
 
 class TclCommandFollow(TclCommandSignaled):
@@ -11,12 +13,12 @@ class TclCommandFollow(TclCommandSignaled):
     aliases = ['follow']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('outname', str)
     ])
 
@@ -26,7 +28,7 @@ class TclCommandFollow(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Creates a geometry object following gerber paths.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Object name to follow.'),
             ('outname', 'Name of the resulting Geometry object.')
         ]),

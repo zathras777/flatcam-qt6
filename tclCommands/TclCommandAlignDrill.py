@@ -1,5 +1,8 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
+from ObjectCollection import FlatCAMGeometry, FlatCAMExcellon
 from tclCommands.TclCommand import TclCommandSignaled
+from fcObjects.gerber import FlatCAMGerber
 
 
 class TclCommandAlignDrill(TclCommandSignaled):
@@ -13,13 +16,13 @@ class TclCommandAlignDrill(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('box', str),
         ('axis', str),
         ('holes', str),
@@ -37,7 +40,7 @@ class TclCommandAlignDrill(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Create excellon with drills for aligment.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object (Gerber or Excellon) to mirror.'),
             ('dia', 'Tool diameter'),
             ('box', 'Name of object which act as box (cutout for example.)'),

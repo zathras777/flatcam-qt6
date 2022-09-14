@@ -1,5 +1,7 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
+from fcObjects.gerber import FlatCAMGerber
 
 
 class TclCommandOpenGerber(TclCommandSignaled):
@@ -11,12 +13,12 @@ class TclCommandOpenGerber(TclCommandSignaled):
     aliases = ['open_gerber']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('filename', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('follow', str),
         ('outname', str)
     ])
@@ -27,7 +29,7 @@ class TclCommandOpenGerber(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Opens a Gerber file.",
-        'args':  collections.OrderedDict([
+        'args':  OrderedDict([
             ('filename', 'Path to file to open.'),
             ('follow', 'N If 1, does not create polygons, just follows the gerber path.'),
             ('outname', 'Name of the resulting Geometry object.')
@@ -48,7 +50,7 @@ class TclCommandOpenGerber(TclCommandSignaled):
         # How the object should be initialized
         def obj_init(gerber_obj, app_obj):
 
-            if not isinstance(gerber_obj, Geometry):
+            if not isinstance(gerber_obj, FlatCAMGerber):    #Geometry):
                 self.raise_tcl_error('Expected FlatCAMGerber, got %s %s.' % (outname, type(gerber_obj)))
 
             # Opening the file happens here
