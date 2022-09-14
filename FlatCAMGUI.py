@@ -1,5 +1,5 @@
 from OpenGL import GL as gl
-from PyQt6.QtCore import pyqtSignal, Qt
+from PyQt6.QtCore import pyqtSignal, Qt, QSize
 from PyQt6.QtGui import QAction, QIcon, QPixmap, QMovie
 from PyQt6.QtWidgets import QMainWindow, QLabel, QGridLayout, \
     QMenu, QApplication, QToolBar, QSplitter, QWidget, QTabWidget, \
@@ -27,7 +27,7 @@ class FlatCAMGUI(QMainWindow):
     # Emitted when persistent window geometry needs to be retained
     geom_update = pyqtSignal(int, int, int, int, int, name='geomUpdate')
     # Emitted when we want to save prior to exit
-    final_save = QtCore.pyqtSignal(name='saveBeforeExit')
+    final_save = pyqtSignal(name='saveBeforeExit')
 
     def __init__(self, version):
         super().__init__()
@@ -306,12 +306,12 @@ class FlatCAMGUI(QMainWindow):
         ### Icons ###
         #############
         self.app_icon = QIcon()
-        self.app_icon.addFile('share/flatcam_icon16.png', QtCore.QSize(16, 16))
-        self.app_icon.addFile('share/flatcam_icon24.png', QtCore.QSize(24, 24))
-        self.app_icon.addFile('share/flatcam_icon32.png', QtCore.QSize(32, 32))
-        self.app_icon.addFile('share/flatcam_icon48.png', QtCore.QSize(48, 48))
-        self.app_icon.addFile('share/flatcam_icon128.png', QtCore.QSize(128, 128))
-        self.app_icon.addFile('share/flatcam_icon256.png', QtCore.QSize(256, 256))
+        self.app_icon.addFile('share/flatcam_icon16.png', QSize(16, 16))
+        self.app_icon.addFile('share/flatcam_icon24.png', QSize(24, 24))
+        self.app_icon.addFile('share/flatcam_icon32.png', QSize(32, 32))
+        self.app_icon.addFile('share/flatcam_icon48.png', QSize(48, 48))
+        self.app_icon.addFile('share/flatcam_icon128.png', QSize(128, 128))
+        self.app_icon.addFile('share/flatcam_icon256.png', QSize(256, 256))
         self.setWindowIcon(self.app_icon)
 
         self.setGeometry(100, 100, 1024, 650)
