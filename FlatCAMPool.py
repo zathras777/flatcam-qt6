@@ -1,6 +1,7 @@
-from PyQt6 import QtCore
-from multiprocessing import Pool
 import dill
+from multiprocessing import Pool
+from PyQt6.QtCore import QObject
+
 
 def run_dill_encoded(what):
     fun, args = dill.loads(what)
@@ -15,10 +16,11 @@ def apply_async(pool, fun, args):
 def func1():
     print("func")
 
-class WorkerPool(QtCore.QObject):
+
+class WorkerPool(QObject):
 
     def __init__(self):
-        super(WorkerPool, self).__init__()
+        super().__init__()
         self.pool = Pool(2)
 
     def add_task(self, task):

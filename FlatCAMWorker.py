@@ -1,7 +1,7 @@
-from PyQt6 import QtCore
+from PyQt6.QtCore import QObject, pyqtSignal
 
 
-class Worker(QtCore.QObject):
+class Worker(QObject):
     """
     Implements a queue of tasks to be carried out in order
     in a single independent thread.
@@ -9,10 +9,10 @@ class Worker(QtCore.QObject):
 
     # avoid multiple tests  for debug availability
     pydevd_failed = False
-    task_completed = QtCore.pyqtSignal(str)
+    task_completed = pyqtSignal(str)
 
     def __init__(self, app, name=None):
-        super(Worker, self).__init__()
+        super().__init__()
         self.app = app
         self.name = name
 

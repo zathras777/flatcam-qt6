@@ -1,7 +1,7 @@
-from FlatCAMGUI import FlatCAMActivityView
 from PyQt6.QtCore import QObject, pyqtSignal
 import weakref
 
+from FlatCAMGUI import FlatCAMActivityView
 
 # import logging
 

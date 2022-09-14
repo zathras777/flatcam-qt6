@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QMainWindow, QLabel, QGridLayout, \
     QMenu, QApplication, QToolBar, QSplitter, QWidget, QTabWidget, \
     QVBoxLayout, QHBoxLayout, QComboBox, QProgressBar, QGroupBox
 from PyQt6.QtOpenGLWidgets import QOpenGLWidget
+
 from GUIElements import *
 
 

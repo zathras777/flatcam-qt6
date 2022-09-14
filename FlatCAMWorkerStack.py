@@ -1,12 +1,13 @@
-from PyQt6 import QtCore
-from FlatCAMWorker import Worker
+from PyQt6.QtCore import QObject, pyqtSignal, QThread
 import multiprocessing
 
+from FlatCAMWorker import Worker
 
-class WorkerStack(QtCore.QObject):
 
-    worker_task = QtCore.pyqtSignal(dict)               # 'worker_name', 'func', 'params'
-    thread_exception = QtCore.pyqtSignal(object)
+class WorkerStack(QObject):
+
+    worker_task = pyqtSignal(dict)               # 'worker_name', 'func', 'params'
+    thread_exception = pyqtSignal(object)
 
     def __init__(self):
         super().__init__()
@@ -18,7 +19,7 @@ class WorkerStack(QtCore.QObject):
         # Create workers crew
         for i in range(0, 2):
             worker = Worker(self, 'Slogger-' + str(i))
-            thread = QtCore.QThread()
+            thread = QThread()
 
             worker.moveToThread(thread)
             thread.started.connect(worker.run)

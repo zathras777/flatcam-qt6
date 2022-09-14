@@ -12,6 +12,7 @@ log = logging.getLogger('base')
 
 EDIT_SIZE_HINT = 80
 
+
 class RadioSet(QWidget):
     activated_custom = pyqtSignal()
 

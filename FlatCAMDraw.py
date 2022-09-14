@@ -21,6 +21,7 @@ from ObjectUI import LengthEntry
 
 from fcTools.FlatCAMTool import FlatCAMTool
 
+
 class BufferSelectionTool(FlatCAMTool):
     """
     Simple input for buffer distance.

@@ -1,10 +1,12 @@
-from FlatCAMObj import *
 import inspect  # TODO: Remove
-import FlatCAMApp
 
 from PyQt6.QtCore import Qt, QVariant, QModelIndex, pyqtSignal, QAbstractItemModel
 from PyQt6.QtGui import QPixmap, QBrush
 from PyQt6.QtWidgets import QTreeView, QAbstractItemView
+
+from FlatCAMObj import *
+import FlatCAMApp
+
 
 class KeySensitiveListView(QTreeView):
     """
