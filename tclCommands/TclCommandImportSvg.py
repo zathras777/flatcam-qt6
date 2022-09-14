@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -11,12 +12,12 @@ class TclCommandImportSvg(TclCommandSignaled):
     aliases = ['import_svg']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('filename', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('type', str),
         ('outname', str)
     ])
@@ -27,7 +28,7 @@ class TclCommandImportSvg(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Import an SVG file as a Geometry Object..",
-        'args':  collections.OrderedDict([
+        'args':  OrderedDict([
             ('filename', 'Path to file to open.'),
             ('type', 'Import as gerber or geometry(default).'),
             ('outname', 'Name of the resulting Geometry object.')

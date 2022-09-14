@@ -1,4 +1,6 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
+#from ObjectCollection import *
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -11,12 +13,12 @@ class TclCommandExteriors(TclCommandSignaled):
     aliases = ['exteriors', 'ext']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('outname', str)
     ])
 
@@ -26,7 +28,7 @@ class TclCommandExteriors(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Get exteriors of polygons.",
-        'args':  collections.OrderedDict([
+        'args':  OrderedDict([
             ('name', 'Name of the source Geometry object.'),
             ('outname', 'Name of the resulting Geometry object.')
         ]),

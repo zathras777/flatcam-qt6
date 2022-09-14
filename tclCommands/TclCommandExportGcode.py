@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -30,14 +31,14 @@ class TclCommandExportGcode(TclCommandSignaled):
     aliases = ['export_gcode']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('preamble', str),
         ('postamble', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict()
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name']
@@ -45,7 +46,7 @@ class TclCommandExportGcode(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Export gcode into console output.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the source Geometry object.'),
             ('preamble', 'Prepend GCODE.'),
             ('postamble', 'Append GCODE.')

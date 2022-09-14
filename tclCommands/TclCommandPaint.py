@@ -1,4 +1,6 @@
-from ObjectCollection import *
+
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -11,14 +13,14 @@ class TclCommandPaint(TclCommandSignaled):
     aliases = ['paint']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('tooldia', float),
         ('overlap', float)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('outname', str),
         ('all', bool),
         ('x', float),
@@ -31,7 +33,7 @@ class TclCommandPaint(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Paint polygons",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the source Geometry object.'),
             ('tooldia', 'Diameter of the tool to be used.'),
             ('overlap', 'Fraction of the tool diameter to overlap cuts.'),

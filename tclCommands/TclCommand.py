@@ -1,7 +1,7 @@
 import sys
 import re
 import abc
-import collections
+from collections import OrderedDict
 
 import FlatCAMApp
 
@@ -21,23 +21,23 @@ class TclCommand(object):
     aliases = []
 
     # dictionary of types from Tcl command, needs to be ordered
-    # OrderedDict should be like collections.OrderedDict([(key,value),(key2,value2)])
-    arg_names = collections.OrderedDict([
+    # OrderedDict should be like OrderedDict([(key,value),(key2,value2)])
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    # OrderedDict should be like collections.OrderedDict([(key,value),(key2,value2)])
-    option_types = collections.OrderedDict()
+    # OrderedDict should be like OrderedDict([(key,value),(key2,value2)])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name']
 
     # structured help for current command, args needs to be ordered
-    # OrderedDict should be like collections.OrderedDict([(key,value),(key2,value2)])
+    # OrderedDict should be like OrderedDict([(key,value),(key2,value2)])
     help = {
         'main': "undefined help.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('argumentname', 'undefined help.'),
             ('optionname', 'undefined help.')
         ]),

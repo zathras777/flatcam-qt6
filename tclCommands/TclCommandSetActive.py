@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,12 +15,12 @@ class TclCommandSetActive(TclCommand):
     aliases = ['set_active']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
 
     ])
 
@@ -29,7 +30,7 @@ class TclCommandSetActive(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': 'Sets an object as active.',
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the Object.'),
         ]),
         'examples': []

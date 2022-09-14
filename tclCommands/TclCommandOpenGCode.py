@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -13,13 +14,13 @@ class TclCommandOpenGCode(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('filename', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('outname', str)
     ])
 
@@ -29,7 +30,7 @@ class TclCommandOpenGCode(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Opens a G-Code file.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('filename', 'Path to file to open.'),
             ('outname', 'Name of the resulting CNCJob object.')
         ]),

@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -12,15 +13,13 @@ class TclCommandSaveProject(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('filename', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['filename']
@@ -28,7 +27,7 @@ class TclCommandSaveProject(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Saves the FlatCAM project to file.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('filename', 'Path to file.'),
         ]),
         'examples': []

@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from tclCommands.TclCommand import *
 
 
@@ -13,14 +15,12 @@ class TclCommandListSys(TclCommand):
     aliases = ['list_sys', 'listsys']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('selection', str),
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = []
@@ -34,8 +34,7 @@ class TclCommandListSys(TclCommand):
                 "In that case it will list only the system variables that starts with that string.\n"
                 "Main categories start with: gerber or excellon or geometry or cncjob or global.\n"
                 "Note: Use get_sys TclCommand to get the value and set_sys TclCommand to set it.\n",
-        'args': collections.OrderedDict([
-        ]),
+        'args': OrderedDict(),
         'examples': ['list_sys',
                      'list_sys ser'
                      'list_sys gerber',

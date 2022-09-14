@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -14,13 +15,13 @@ class TclCommandMillHoles(TclCommandSignaled):
     aliases = ['millholes', 'mill']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # This is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('tools', str),
         ('outname', str),
         ('tooldia', float),
@@ -33,7 +34,7 @@ class TclCommandMillHoles(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Create Geometry Object for milling holes from Excellon.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the Excellon Object.'),
             ('tools', 'Comma separated indexes of tools (example: 1,3 or 2).'),
             ('tooldia', 'Diameter of the milling tool (example: 0.1).'),

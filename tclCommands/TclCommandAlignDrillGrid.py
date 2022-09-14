@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -16,13 +17,13 @@ class TclCommandAlignDrillGrid(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('outname', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('dia', float),
         ('gridx', float),
         ('gridoffsetx', float),
@@ -38,7 +39,7 @@ class TclCommandAlignDrillGrid(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Create excellon with drills for aligment grid.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('outname', 'Name of the object to create.'),
             ('dia', 'Tool diameter.'),
             ('gridx', 'Grid size in X axis.'),

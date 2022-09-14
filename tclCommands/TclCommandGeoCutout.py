@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -12,13 +13,13 @@ class TclCommandGeoCutout(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('dia', float),
         ('margin', float),
         ('gapsize', float),
@@ -31,7 +32,7 @@ class TclCommandGeoCutout(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Cut holding gaps from geometry.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the geometry object.'),
             ('dia', 'Tool diameter.'),
             ('margin', 'Margin over bounds.'),

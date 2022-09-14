@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,16 +15,14 @@ class TclCommandOffset(TclCommand):
     aliases = ['offset']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('x', float),
         ('y', float)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name', 'x', 'y']
@@ -31,7 +30,7 @@ class TclCommandOffset(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Changes the position of the object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object to offset.'),
             ('x', 'Offset distance in the X axis.'),
             ('y', 'Offset distance in the Y axis')

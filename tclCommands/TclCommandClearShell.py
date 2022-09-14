@@ -1,5 +1,6 @@
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
-from ObjectCollection import *
 
 
 class TclCommandClearShell(TclCommand):
@@ -14,12 +15,12 @@ class TclCommandClearShell(TclCommand):
     aliases = ['clear']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
 
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
 
     ])
 
@@ -29,7 +30,7 @@ class TclCommandClearShell(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Clear the text in the Tcl Shell browser.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
         ]),
         'examples': []
     }

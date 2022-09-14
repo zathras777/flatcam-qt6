@@ -1,4 +1,4 @@
-from ObjectCollection import *
+from collections import OrderedDict
 from copy import copy,deepcopy
 
 from tclCommands.TclCommand import TclCommand
@@ -16,12 +16,12 @@ class TclCommandPanelize(TclCommand):
     aliases = ['panelize','pan', 'panel']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('rows', int),
         ('columns', int),
         ('spacing_columns', float),
@@ -36,7 +36,7 @@ class TclCommandPanelize(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': 'Rectangular panelizing.',
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object to panelize.'),
             ('box', 'Name of object which acts as box (cutout for example.)'
                     'for cutout boundary. Object from name is used if not specified.'),

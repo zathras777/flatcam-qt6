@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,14 +15,10 @@ class TclCommandPlot(TclCommand):
     aliases = ['plot']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
-
-    ])
+    arg_names = OrderedDict()
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = []
@@ -29,9 +26,7 @@ class TclCommandPlot(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Updates the plot on the user interface.",
-        'args': collections.OrderedDict([
-
-        ]),
+        'args': OrderedDict(),
         'examples': []
     }
 

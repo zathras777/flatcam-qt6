@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from tclCommands.TclCommand import *
 
 
@@ -11,15 +13,11 @@ class TclCommandSaveSys(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
-
-    ])
+    arg_names = OrderedDict()
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = []
@@ -27,7 +25,7 @@ class TclCommandSaveSys(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Saves the FlatCAM system paramaters to defaults file.",
-        'args': collections.OrderedDict([]),
+        'args': OrderedDict(),
         'examples': []
     }
 

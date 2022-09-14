@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -11,12 +12,12 @@ class TclCommandAddPolygon(TclCommandSignaled):
     aliases = ['add_polygon', 'add_poly']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict()
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name']
@@ -24,7 +25,7 @@ class TclCommandAddPolygon(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Creates a polygon in the given Geometry object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the Geometry object to which to append the polygon.'),
             ('xi, yi', 'Coordinates of points in the polygon.')
         ]),

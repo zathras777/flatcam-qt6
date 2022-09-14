@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,7 +15,7 @@ class TclCommandAddCircle(TclCommand):
     aliases = ['add_circle']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('center_x', float),
         ('center_y', float),
@@ -22,7 +23,7 @@ class TclCommandAddCircle(TclCommand):
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
 
     ])
 
@@ -32,7 +33,7 @@ class TclCommandAddCircle(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Creates a circle in the given Geometry object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the geometry object to which to append the circle.'),
             ('center_x', 'X coordinate of the center of the circle.'),
             ('center_y', 'Y coordinates of the center of the circle.'),

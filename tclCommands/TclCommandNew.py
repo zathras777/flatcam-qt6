@@ -1,5 +1,5 @@
-from ObjectCollection import *
-from PyQt6 import QtCore
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -12,10 +12,10 @@ class TclCommandNew(TclCommand):
     aliases = ['new']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict()
+    arg_names = OrderedDict()
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict()
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = []
@@ -23,7 +23,7 @@ class TclCommandNew(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Starts a new project. Clears objects from memory.",
-        'args':  collections.OrderedDict(),
+        'args':  OrderedDict(),
         'examples': []
     }
 

@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,15 +15,13 @@ class TclCommandScale(TclCommand):
     aliases = ['scale']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('factor', float)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name', 'factor']
@@ -30,7 +29,7 @@ class TclCommandScale(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Resizes the object by a factor.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object to resize.'),
             ('factor', 'Fraction by which to scale.')
         ]),

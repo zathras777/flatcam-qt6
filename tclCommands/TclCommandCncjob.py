@@ -1,4 +1,6 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
+#from ObjectCollection import *
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -18,12 +20,12 @@ class TclCommandCncjob(TclCommandSignaled):
     aliases = ['cncjob']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('z_cut',float),
         ('z_move',float),
         ('feedrate',float),
@@ -40,7 +42,7 @@ class TclCommandCncjob(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Generates a CNC Job from a Geometry Object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the source object.'),
             ('z_cut', 'Z-axis cutting position.'),
             ('z_move', 'Z-axis moving position.'),

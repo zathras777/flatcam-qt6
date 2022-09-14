@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -15,12 +16,12 @@ class TclCommandGeoUnion(TclCommand):
     aliases = ['geo_union']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
 
     ])
 
@@ -33,7 +34,7 @@ class TclCommandGeoUnion(TclCommand):
                  'of the geometry object. For example, if it contains '
                  '2 intersecting polygons, this opperation adds them into'
                  'a single larger polygon.'),
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the Geometry Object.'),
         ]),
         'examples': []

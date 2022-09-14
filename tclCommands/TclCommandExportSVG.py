@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommand
 
 
@@ -14,14 +15,14 @@ class TclCommandExportSVG(TclCommand):
     aliases = ['export_svg']
 
     # Dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str),
         ('filename', str),
         ('scale_factor', float)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('scale_factor', float)
     ])
 
@@ -31,7 +32,7 @@ class TclCommandExportSVG(TclCommand):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Export a Geometry Object as a SVG File.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the object export.'),
             ('filename', 'Path to the file to export.'),
             ('scale_factor', 'Multiplication factor used for scaling line widths during export.')

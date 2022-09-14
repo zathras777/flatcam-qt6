@@ -1,4 +1,6 @@
-from ObjectCollection import *
+
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -11,12 +13,12 @@ class TclCommandDrillcncjob(TclCommandSignaled):
     aliases = ['drillcncjob']
 
     # dictionary of types from Tcl command, needs to be ordered
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # dictionary of types from Tcl command, needs to be ordered , this  is  for options  like -optionname value
-    option_types = collections.OrderedDict([
+    option_types = OrderedDict([
         ('tools',str),
         ('drillz',float),
         ('travelz',float),
@@ -32,7 +34,7 @@ class TclCommandDrillcncjob(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Generates a Drill CNC Job from a Excellon Object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the source object.'),
             ('tools', 'Comma separated indexes of tools (example: 1,3 or 2) or select all if not specified.'),
             ('drillz', 'Drill depth into material (example: -2.0).'),

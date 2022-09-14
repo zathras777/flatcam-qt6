@@ -1,4 +1,5 @@
-from ObjectCollection import *
+from collections import OrderedDict
+
 from tclCommands.TclCommand import TclCommandSignaled
 
 
@@ -12,15 +13,13 @@ class TclCommandSubtractPoly(TclCommandSignaled):
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For positional arguments
-    arg_names = collections.OrderedDict([
+    arg_names = OrderedDict([
         ('name', str)
     ])
 
     # Dictionary of types from Tcl command, needs to be ordered.
     # For options like -optionname value
-    option_types = collections.OrderedDict([
-
-    ])
+    option_types = OrderedDict()
 
     # array of mandatory options for current Tcl command: required = {'name','outname'}
     required = ['name']
@@ -28,7 +27,7 @@ class TclCommandSubtractPoly(TclCommandSignaled):
     # structured help for current command, args needs to be ordered
     help = {
         'main': "Subtract polygon from the given Geometry object.",
-        'args': collections.OrderedDict([
+        'args': OrderedDict([
             ('name', 'Name of the Geometry object from which to subtract.'),
             ('x0 y0 x1 y1 x2 y2 ...', 'Points defining the polygon.')
         ]),
