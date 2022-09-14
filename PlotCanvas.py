@@ -9,13 +9,13 @@
 import logging
 import numpy as np
 
-from PyQt6 import QtCore
 from PyQt6.QtCore import QObject
 from vispy.scene.visuals import InfiniteLine
 from vispy.geometry import Rect
 
-from VisPyCanvas import VisPyCanvas
-from VisPyVisuals import ShapeGroup, ShapeCollection, TextCollection, TextGroup, Cursor
+from fcvispy.VisPyCanvas import VisPyCanvas
+from fcvispy.VisPyVisuals import ShapeGroup, ShapeCollection, TextCollection, TextGroup, Cursor
+
 
 log = logging.getLogger('base')
 

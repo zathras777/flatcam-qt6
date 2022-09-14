@@ -6,7 +6,8 @@ from vispy.visuals import CompoundVisual, LineVisual, MeshVisual, TextVisual, Ma
 from vispy.scene.visuals import VisualNode, generate_docstring, visuals
 from vispy.gloo import set_state
 from vispy.color import Color
-from VisPyTesselators import GLUTess
+
+from .VisPyTesselators import GLUTess
 
 
 class FlatCAMLineVisual(LineVisual):

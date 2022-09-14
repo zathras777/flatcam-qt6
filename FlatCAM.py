@@ -1,5 +1,4 @@
 import sys
-import VisPyPatches
 
 from multiprocessing import freeze_support
 from PyQt6.QtWidgets import QApplication
@@ -28,7 +27,6 @@ if __name__ == '__main__':
     freeze_support()
 
     debug_trace()
-#    VisPyPatches.apply_patches()
 
     app = QApplication(sys.argv)
     fc = App()
