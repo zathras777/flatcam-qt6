@@ -29,6 +29,12 @@ $ python -m pip install -r requirements.txt
 
 ```
 
+On Windows, the win32 module is also needed.
+
+```shell
+$ python -m pip install pywin32
+```
+
 ## Running
 
 Presently it's just started via the simple
@@ -39,4 +45,7 @@ $ python ./FlatCAM.py
 
 ## Bugs
 
-Many. It's a large amount of code and various parts don't seem to work or don't seem to work quite correctly. Pull requests more than welcome!
+- Huge window size on Windows!
+- large curosr on Linux
+
+There are many additional bugs! It's a large amount of code and various parts don't seem to work or don't seem to work quite correctly. Pull requests more than welcome!

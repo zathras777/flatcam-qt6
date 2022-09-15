@@ -8,3 +8,9 @@ rtree
 scipy
 vispy
 pyqt6
+svg.path
+ezdxf
+PyOpenGL
+
+
+
