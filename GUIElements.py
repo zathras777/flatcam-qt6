@@ -51,6 +51,7 @@ class RadioSet(QWidget):
     def on_toggle(self):
         log.debug("Radio toggled")
         radio = self.sender()
+        # TODO - catch error if sender isn't a QRadioButton
         if radio.isChecked():
             self.group_toggle_fn()
             self.activated_custom.emit()
