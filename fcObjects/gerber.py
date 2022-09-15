@@ -1,16 +1,14 @@
 import inspect
 
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QLabel, QWidget, QVBoxLayout, QHBoxLayout, \
-    QGridLayout, QPushButton
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtWidgets import QLabel, QGridLayout, QPushButton
+from shapely.geometry import Polygon, MultiPolygon
 
 from FlatCAMObj import FlatCAMObj
 from ObjectUI import ObjectUI
 from camlib import Gerber
 
-from GUIElements import FCEntry, FloatEntry, EvalEntry, FCCheckBox, FCTable, \
-    LengthEntry, FCTextArea, IntEntry, RadioSet, OptionalInputSection
+from GUIElements import FCEntry, FloatEntry, FCCheckBox, \
+    LengthEntry, IntEntry, RadioSet
 
 
 class GerberObjectUI(ObjectUI):
