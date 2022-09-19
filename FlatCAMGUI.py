@@ -29,11 +29,12 @@ class FlatCAMGUI(QMainWindow):
     # Emitted when we want to save prior to exit
     final_save = pyqtSignal(name='saveBeforeExit')
 
-    def __init__(self, version):
+    def __init__(self, version:str, app):
         super().__init__()
-      
+
         # Divine icon pack by Ipapun @ finicons.com
 
+        self.app = app
         ############
         ### Menu ###
         ############
@@ -41,7 +42,7 @@ class FlatCAMGUI(QMainWindow):
 
         ### File ###
         self.menufile = self.menu.addMenu('&File')
-
+        self.menufile.setToolTipsVisible(True)
         # New
         self.menufilenew = QAction(QIcon('share/file16.png'), '&New', self)
         self.menufile.addAction(self.menufilenew)
@@ -174,10 +175,23 @@ class FlatCAMGUI(QMainWindow):
         ### Toolbar ###
         ###############
         self.toolbarfile = QToolBar('File')
-        self.addToolBar(self.toolbarfile)
-        self.file_new_btn = self.toolbarfile.addAction(QIcon('share/file32.png'), "New project")
-        self.file_open_btn = self.toolbarfile.addAction(QIcon('share/folder32.png'), "Open project")
-        self.file_save_btn = self.toolbarfile.addAction(QIcon('share/floppy32.png'), "Save project")
+        self.toolbarfile.setToolTipDuration(10000)
+
+
+        def add_to_toolbar(toolbar:QToolBar, iconName:str, actionName:str, eventFn) -> None:
+            btn = QAction(QIcon(iconName), actionName, self)
+            btn.setStatusTip(actionName)
+            btn.setToolTip(actionName)
+            btn.triggered.connect(eventFn)
+            toolbar.addAction(btn)
+
+        self.addToolBar(self.toolbarfile)       
+        add_to_toolbar(self.toolbarfile, "share/file32.png", "New Project", self.app.on_file_new)
+        add_to_toolbar(self.toolbarfile, 'share/folder32.png', "Open project", self.app.on_file_openproject)
+        add_to_toolbar(self.toolbarfile, 'share/floppy32.png', "Save project", self.app.on_file_saveproject)
+
+        # self.file_open_btn = self.toolbarfile.addAction(QIcon('share/folder32.png'), "Open project")
+        # self.file_save_btn = self.toolbarfile.addAction(QIcon('share/floppy32.png'), "Save project")
 
         self.toolbargeo = QToolBar('Edit')
         self.addToolBar(self.toolbargeo)
@@ -222,6 +236,7 @@ class FlatCAMGUI(QMainWindow):
 
         ### Selected ###
         self.selected_tab = QWidget()
+        self.selected_tab.setToolTip("Selected Object Details")
         self.selected_tab_layout = QVBoxLayout(self.selected_tab)
         self.selected_tab_layout.setContentsMargins(2, 2, 2, 2)
         self.selected_scroll_area = VerticalScrollArea()
@@ -321,6 +336,23 @@ class FlatCAMGUI(QMainWindow):
     def showSelectedTab(self):
         self.notebook.setCurrentIndex(1)
 
+    def eventFilter(self, obj, event):
+        """
+        Filter the ToolTips display based on a Preferences setting
+
+        :param obj:
+        :param event: QT event to filter
+        :return:
+        """
+        print(f"eventFilter({obj}, {event})")
+        if self.app.defaults["global_toggle_tooltips"] is False:
+            if event.type() == QtCore.QEvent.ToolTip:
+                return True
+            else:
+                return False
+
+        return False
+
     def closeEvent(self, event):
         grect = self.geometry()
         self.geom_update.emit(grect.x(), grect.y(), grect.width(), grect.height(), self.splitter.sizes()[0])
@@ -377,9 +409,9 @@ class FlatCAMInfoBar(QWidget):
         layout.addWidget(self.icon)
 
         self.text = QLabel(self)
-        self.text.setText("Hello!")
+        self.text.setText("Ready")
         self.text.setToolTip("Hello!")
-
+        self.set_status("Ready", "success")
         layout.addWidget(self.text)
 
         layout.addStretch()

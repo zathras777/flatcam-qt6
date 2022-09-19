@@ -510,7 +510,6 @@ class FlatCAMGeometry(FlatCAMObj, Geometry):
         return factor
 
     def plot_element(self, element):
-        print(f"plot_element({type(element)}")
         try:
             for sub_el in element.geoms:
                 self.plot_element(sub_el)

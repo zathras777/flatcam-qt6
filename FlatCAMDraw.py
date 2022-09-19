@@ -206,7 +206,6 @@ class FCCircle(FCShapeTool):
     def __init__(self, draw_app):
         DrawTool.__init__(self, draw_app)
         self.start_msg = "Click on CENTER ..."
-        print("FCCircle....")
 
     def click(self, point):
         self.points.append(point)
@@ -537,7 +536,7 @@ class FCSelect(DrawTool):
             self.draw_app.selected = []
 
         self.draw_app.set_selected(closest_shape)
-        self.draw_app.app.log.debug("Selected shape containing: " + str(closest_shape.geo))
+        #self.draw_app.app.log.debug("Selected shape containing: " + str(closest_shape.geo))
 
         return ""
 

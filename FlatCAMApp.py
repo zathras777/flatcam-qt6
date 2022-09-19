@@ -128,8 +128,7 @@ class App(QObject):
     # Emitted when multiprocess pool has been recreated
     pool_recreated = pyqtSignal(object)
 
-    # Emitted when an unhandled exception happens
-    # in the worker task.
+    # Emitted when an unhandled exception happens in a worker task.
     thread_exception = pyqtSignal(object)
 
     @classmethod
@@ -209,7 +208,7 @@ class App(QObject):
 
         QObject.__init__(self)
 
-        self.ui = FlatCAMGUI(self.version)
+        self.ui = FlatCAMGUI(self.version, self)
         self.ui.geom_update[int, int, int, int, int].connect(self.save_geometry)
         self.ui.final_save.connect(self.final_save)
 
@@ -222,10 +221,6 @@ class App(QObject):
         #### Plot Area ####
         # self.plotcanvas = PlotCanvas(self.ui.splitter)
         self.plotcanvas = PlotCanvas(self.ui.right_layout, self)
-        # self.plotcanvas.mpl_connect('button_press_event', self.on_click_over_plot)
-        # self.plotcanvas.mpl_connect('motion_notify_event', self.on_mouse_move_over_plot)
-        # self.plotcanvas.mpl_connect('key_press_event', self.on_key_over_plot)
-
         self.plotcanvas.vis_connect('mouse_move', self.on_mouse_move_over_plot)
         self.plotcanvas.vis_connect('mouse_release', self.on_click_over_plot)
         self.plotcanvas.vis_connect('key_press', self.on_key_over_plot)
@@ -492,27 +487,6 @@ class App(QObject):
             self.ui.options_scroll_area.verticalScrollBar().sizeHint().width())
 
         #### Worker ####
-        # App.log.info("Starting Worker...")
-        # self.worker = Worker(self)
-        # self.thr1 = QtCore.QThread()
-        # self.worker.moveToThread(self.thr1)
-        # self.connect(self.thr1, QtCore.SIGNAL("started()"), self.worker.run)
-        # self.thr1.start()
-
-        #### Check for updates ####
-        # Separate thread (Not worker)
-        # App.log.info("Checking for updates in backgroud (this is version %s)." % str(self.version))
-
-        # self.worker2 = Worker(self, name="worker2")
-        # self.thr2 = QtCore.QThread()
-        # self.worker2.moveToThread(self.thr2)
-        # self.connect(self.thr2, QtCore.SIGNAL("started()"), self.worker2.run)
-        # self.connect(self.thr2, QtCore.SIGNAL("started()"),
-        #              lambda: self.worker_task.emit({'fcn': self.version_check,
-        #                                             'params': [],
-        #                                             'worker_name': "worker2"}))
-        # self.thr2.start()
-
 
         # Setup some App global variables.
         self.grb_list = ['gbr', 'ger', 'gtl', 'gbl', 'gts', 'gbs', 'gtp', 'gbp', 'gto', 'gbo', 'gm1', 'gm2', 'gm3', 'gko',
@@ -526,13 +500,8 @@ class App(QObject):
         self.dxf_list = ['dxf']
         self.prj_list = ['flatprj']
 
-        # Create multiprocess pool
-        # self.pool = WorkerPool()
-        # self.worker_task.connect(self.pool.add_task)
-
         self.workers = WorkerStack()
         self.worker_task.connect(self.workers.add_task)
-
 
         ### Signal handling ###
         ## Custom signals
@@ -584,9 +553,6 @@ class App(QObject):
         self.ui.menuprojectgeneratecnc.triggered.connect(lambda: self.generate_cnc_job(self.collection.get_selected()))
         self.ui.menuprojectdelete.triggered.connect(self.on_delete)
         # Toolbar
-        self.ui.file_new_btn.triggered.connect(self.on_file_new)
-        self.ui.file_open_btn.triggered.connect(self.on_file_openproject)
-        self.ui.file_save_btn.triggered.connect(self.on_file_saveproject)
         self.ui.zoom_fit_btn.triggered.connect(self.on_zoom_fit)
         self.ui.zoom_in_btn.triggered.connect(lambda: self.plotcanvas.zoom(1 / 1.5))
         self.ui.zoom_out_btn.triggered.connect(lambda: self.plotcanvas.zoom(1.5))
@@ -1990,10 +1956,10 @@ class App(QObject):
         self.report_usage("on_file_saveprojectas")
 
         try:
-            filename = QFileDialog.getSaveFileName(caption="Save Project As ...",
+            filename, _ = QFileDialog.getSaveFileName(caption="Save Project As ...",
                                                          directory=self.get_last_folder())
         except TypeError:
-            filename = QFileDialog.getSaveFileName(caption="Save Project As ...")
+            filename, _ = QFileDialog.getSaveFileName(caption="Save Project As ...")
 
         if filename == "":
             return
