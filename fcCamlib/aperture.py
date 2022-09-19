@@ -9,8 +9,11 @@
 
 import re
 
+from numpy import cos, pi, sin
 from shapely import affinity
-from shapely.geometry import LineString, Point
+from shapely.geometry import LineString, Point, Polygon
+from shapely.geometry import box as shply_box
+from shapely.ops import unary_union
 
 from .utils import setup_log
 
@@ -303,13 +306,13 @@ class ApertureMacro:
             if r <= 0:
                 break
             ring = Point((x, y)).buffer(r).exterior.buffer(thickness/2.0)
-            result = cascaded_union([result, ring])
+            result = unary_union([result, ring])
             i += 1
 
         ## Crosshair
         hor = LineString([(x - cross_len, y), (x + cross_len, y)]).buffer(cross_th/2.0, cap_style=2)
         ver = LineString([(x, y-cross_len), (x, y + cross_len)]).buffer(cross_th/2.0, cap_style=2)
-        result = cascaded_union([result, hor, ver])
+        result = unary_union([result, hor, ver])
 
         return {"pol": 1, "geometry": result}
 

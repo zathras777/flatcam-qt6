@@ -1,14 +1,14 @@
+import re
+import logging
+
+from copy import copy
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QScrollArea, QWidget, QHBoxLayout, QVBoxLayout, QButtonGroup, QRadioButton, QLineEdit
 from PyQt6.QtCore import QEvent, pyqtSignal
 
-from copy import copy
-#import FlatCAMApp
-import re
-import logging
 
-log = logging.getLogger('base')
+log = logging.getLogger('GuiElements')
 
 EDIT_SIZE_HINT = 80
 

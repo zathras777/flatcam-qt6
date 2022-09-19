@@ -1,14 +1,14 @@
 import inspect
 
+from numpy import random
 from PyQt6.QtWidgets import QLabel, QGridLayout, QPushButton
-from shapely.geometry import Polygon, MultiPolygon
+from shapely.geometry import JOIN_STYLE, LineString, Polygon, MultiPolygon
+from shapely.ops import unary_union
 
-from FlatCAMObj import FlatCAMObj
-from ObjectUI import ObjectUI
 from fcCamlib.gerber import Gerber
-
-from GUIElements import FCEntry, FloatEntry, FCCheckBox, \
-    LengthEntry, IntEntry, RadioSet
+from FlatCAMObj import FlatCAMGeometry, FlatCAMObj, ObjectDeleted
+from GUIElements import FCEntry, FloatEntry, FCCheckBox, LengthEntry, IntEntry, RadioSet
+from ObjectUI import ObjectUI
 
 
 class GerberObjectUI(ObjectUI):
@@ -676,7 +676,7 @@ class FlatCAMGerber(FlatCAMObj, Gerber):
             geometry = [geometry]
 
         def random_color():
-            color = np.random.rand(4)
+            color = random.rand(4)
             color[3] = 1
             return color
 

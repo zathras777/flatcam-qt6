@@ -8,9 +8,11 @@
 
 import re
 
+from decimal import Decimal
 from numpy import arctan2, sqrt
 from io import StringIO
-from shapely.geometry import Polygon, LineString, Point, LinearRing
+from shapely import affinity
+from shapely.geometry import LineString, Point, LinearRing
 from shapely.ops import unary_union
 
 from .fcTree import FlatCAMRTreeStorage

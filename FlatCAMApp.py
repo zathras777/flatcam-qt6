@@ -13,6 +13,8 @@ from PyQt6.QtCore import Qt, QObject, pyqtSignal, QTimer, QEventLoop
 from PyQt6.QtWidgets import QApplication, QLabel, QDockWidget, QFileDialog, \
     QVBoxLayout, QHBoxLayout, QPushButton, QMessageBox, QDialog
 from PyQt6.QtGui import QIcon
+from shapely.geometry import LineString
+from shapely.ops import unary_union
 from xml.dom.minidom import parseString as parse_xml_string
 
 ########################################
@@ -2745,7 +2747,7 @@ class App(QObject):
                                [pts[6], pts[7], pts[8]],
                                [pts[9], pts[10], pts[11]]]}
                 cuts = cases[kwa['gaps']]
-                geo_obj.solid_geometry = cascaded_union([LineString(segment) for segment in cuts])
+                geo_obj.solid_geometry = unary_union([LineString(segment) for segment in cuts])
 
             try:
                 obj.app.new_object("geometry", name + "_cutout", geo_init_me)

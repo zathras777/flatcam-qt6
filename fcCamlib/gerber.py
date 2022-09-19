@@ -16,6 +16,7 @@ from shapely.geometry import Polygon, LineString, Point, MultiPolygon
 from shapely.geometry import box as shply_box
 from shapely.ops import unary_union
 
+from .aperture import ApertureMacro
 from .geometry import Geometry
 from .utils import arc, setup_log
 

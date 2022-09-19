@@ -1,10 +1,12 @@
 import inspect  # TODO: For debugging only.
 import re
+import sys
 
 from copy import copy
 from io import StringIO
 from PyQt6.QtCore import pyqtSignal, Qt, QObject, QTimer
 from PyQt6.QtWidgets import QTableWidgetItem, QFileDialog
+from shapely import affinity
 from shapely.geometry import Point
 from shapely.geometry.base import JOIN_STYLE
 

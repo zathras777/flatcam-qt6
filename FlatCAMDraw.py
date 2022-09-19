@@ -1,31 +1,55 @@
-import shapely.affinity as affinity
-
-from numpy import arctan2, Inf, array, asarray, sqrt, sign, dot #pi, ceil, sin, cos, sign, dot
-#from numpy.linalg import solve
+from numpy import arctan2, Inf, array, asarray, sqrt, sign, dot, float32, transpose
+from numpy.linalg import norm, solve
 from PyQt6.QtCore import QObject, QTimer
 from PyQt6.QtGui import QIcon, QDoubleValidator
 from PyQt6.QtWidgets import QMenu, QLabel, QFormLayout, QHBoxLayout, QPushButton, QToolBar, QLineEdit
 from rtree import index as rtindex
-#from shapely.geometry.base import BaseGeometry
+from shapely import affinity
 from shapely.geometry import Polygon, LineString, Point, LinearRing
-#from shapely.geometry import MultiPoint, MultiPolygon
-#from shapely.geometry import box as shply_box
 from shapely.ops import unary_union
 from shapely.wkt import loads as sloads
 from shapely.wkt import dumps as sdumps
 from vispy.scene.visuals import Markers
 
 import FlatCAMApp
-#from camlib import *
 from ObjectUI import LengthEntry
 
 from fcTools.FlatCAMTool import FlatCAMTool
 
-from fcCamlib.cncjob import CNCjob
-from fcCamlib.excellon import Excellon
 from fcCamlib.fcTree import FlatCAMRTreeStorage
 from fcCamlib.geometry import Geometry
 from fcCamlib.utils import arc
+
+
+def three_point_circle(p1, p2, p3):
+    """
+    Computes the center and radius of a circle from
+    3 points on its circumference.
+
+    :param p1: Point 1
+    :param p2: Point 2
+    :param p3: Point 3
+    :return: center, radius
+    """
+    # Midpoints
+    a1 = (p1 + p2) / 2.0
+    a2 = (p2 + p3) / 2.0
+
+    # Normals
+    b1 = dot((p2 - p1), array([[0, -1], [1, 0]], dtype=float32))
+    b2 = dot((p3 - p2), array([[0, 1], [-1, 0]], dtype=float32))
+
+    # Params
+    T = solve(transpose(array([-b1, b2])), a1 - a2)
+
+    # Center
+    center = a1 + b1 * T[0]
+
+    # Radius
+    radius = norm(center - p1)
+
+    return center, radius, T[0]
+
 
 class BufferSelectionTool(FlatCAMTool):
     """
