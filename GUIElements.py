@@ -2,9 +2,11 @@ import re
 import logging
 
 from copy import copy
-from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QScrollArea, QWidget, QHBoxLayout, QVBoxLayout, QButtonGroup, QRadioButton, QLineEdit
+from PyQt6 import QtCore
+from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtWidgets import QScrollArea, QWidget, QTableWidget, \
+    QPlainTextEdit, QCheckBox, QHBoxLayout, QVBoxLayout, \
+        QButtonGroup, QRadioButton, QLineEdit
 from PyQt6.QtCore import QEvent, pyqtSignal
 
 
@@ -78,7 +80,7 @@ class RadioSet(QWidget):
 
 class LengthEntry(QLineEdit):
     def __init__(self, output_units='IN', parent=None):
-        super(LengthEntry, self).__init__(parent)
+        super().__init__(parent)
 
         self.output_units = output_units
         self.format_re = re.compile(r"^([^\s]+)(?:\s([a-zA-Z]+))?$")
@@ -121,13 +123,13 @@ class LengthEntry(QLineEdit):
         self.setText(str(val))
 
     def sizeHint(self):
-        default_hint_size = super(LengthEntry, self).sizeHint()
+        default_hint_size = super().sizeHint()
         return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
-class FloatEntry(QtWidgets.QLineEdit):
+class FloatEntry(QLineEdit):
     def __init__(self, parent=None):
-        super(FloatEntry, self).__init__(parent)
+        super().__init__(parent)
 
     def returnPressed(self, *args, **kwargs):
         val = self.get_value()
@@ -150,14 +152,14 @@ class FloatEntry(QtWidgets.QLineEdit):
         self.setText("%.6f" % val)
 
     def sizeHint(self):
-        default_hint_size = super(FloatEntry, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
-class IntEntry(QtWidgets.QLineEdit):
+class IntEntry(QLineEdit):
 
     def __init__(self, parent=None, allow_empty=False, empty_val=None):
-        super(IntEntry, self).__init__(parent)
+        super().__init__(parent)
         self.allow_empty = allow_empty
         self.empty_val = empty_val
 
@@ -178,11 +180,11 @@ class IntEntry(QtWidgets.QLineEdit):
         self.setText(str(val))
 
     def sizeHint(self):
-        default_hint_size = super(IntEntry, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
-class FCEntry(QtWidgets.QLineEdit):
+class FCEntry(QLineEdit):
     def __init__(self, parent=None):
         super(FCEntry, self).__init__(parent)
 
@@ -193,13 +195,13 @@ class FCEntry(QtWidgets.QLineEdit):
         self.setText(str(val))
 
     def sizeHint(self):
-        default_hint_size = super(FCEntry, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
-class EvalEntry(QtWidgets.QLineEdit):
+class EvalEntry(QLineEdit):
     def __init__(self, parent=None):
-        super(EvalEntry, self).__init__(parent)
+        super().__init__(parent)
 
     def returnPressed(self, *args, **kwargs):
         val = self.get_value()
@@ -220,13 +222,13 @@ class EvalEntry(QtWidgets.QLineEdit):
         self.setText(str(val))
 
     def sizeHint(self):
-        default_hint_size = super(EvalEntry, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
-class FCCheckBox(QtWidgets.QCheckBox):
+class FCCheckBox(QCheckBox):
     def __init__(self, label='', parent=None):
-        super(FCCheckBox, self).__init__(str(label), parent)
+        super().__init__(str(label), parent)
 
     def get_value(self):
         return self.isChecked()
@@ -238,9 +240,9 @@ class FCCheckBox(QtWidgets.QCheckBox):
         self.set_value(not self.get_value())
 
 
-class FCTextArea(QtWidgets.QPlainTextEdit):
+class FCTextArea(QPlainTextEdit):
     def __init__(self, parent=None):
-        super(FCTextArea, self).__init__(parent)
+        super().__init__(parent)
 
     def set_value(self, val):
         self.setPlainText(val)
@@ -249,8 +251,8 @@ class FCTextArea(QtWidgets.QPlainTextEdit):
         return str(self.toPlainText())
 
     def sizeHint(self):
-        default_hint_size = super(FCTextArea, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
 
 
 class VerticalScrollArea(QScrollArea):
@@ -289,7 +291,7 @@ class VerticalScrollArea(QScrollArea):
             # else:
             #     log.debug(" Scroll bar hidden")
             #     self.setMinimumWidth(self.widget().minimumSizeHint().width())
-        return QtWidgets.QWidget.eventFilter(self, source, event)
+        return QWidget.eventFilter(self, source, event)
 
 
 class OptionalInputSection:
@@ -324,10 +326,10 @@ class OptionalInputSection:
                 widget.setEnabled(False)
 
 
-class FCTable(QtWidgets.QTableWidget):
+class FCTable(QTableWidget):
     def __init__(self, parent=None):
-        super(FCTable, self).__init__(parent)
+        super().__init__(parent)
 
     def sizeHint(self):
-        default_hint_size = super(FCTable, self).sizeHint()
-        return QtCore.QSize(EDIT_SIZE_HINT, default_hint_size.height())
+        default_hint_size = super().sizeHint()
+        return QSize(EDIT_SIZE_HINT, default_hint_size.height())
