@@ -12,7 +12,7 @@ from shapely.wkt import dumps as sdumps
 from vispy.scene.visuals import Markers
 
 import FlatCAMApp
-from ObjectUI import LengthEntry
+from GUIElements import LengthEntry
 
 from fcTools.FlatCAMTool import FlatCAMTool
 

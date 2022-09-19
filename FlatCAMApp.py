@@ -29,10 +29,14 @@ from FlatCAMShell import FCShell
 from FlatCAMDraw import FlatCAMDraw
 from FlatCAMProcess import *
 from FlatCAMWorkerStack import WorkerStack
+from multiprocessing import Pool
+
+from fcCamlib.gerber import Gerber, GerberParseError
+from fcCamlib.cncjob import CNCjob
+from fcCamlib.excellon import Excellon
 from fcTools.MeasurementTool import Measurement
 from fcTools.DblSidedTool import DblSidedTool
-from multiprocessing import Pool
-from fcCamlib.gerber import Gerber, GerberParseError
+
 from project import dict2obj, to_dict
 
 import gc

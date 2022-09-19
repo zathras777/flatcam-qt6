@@ -6,10 +6,11 @@ from shapely.geometry import JOIN_STYLE, LineString, Polygon, MultiPolygon
 from shapely.ops import unary_union
 
 from fcCamlib.gerber import Gerber
-from FlatCAMObj import FlatCAMGeometry, FlatCAMObj, ObjectDeleted
+from FlatCAMObj import FlatCAMObj, ObjectDeleted
 from GUIElements import FCEntry, FloatEntry, FCCheckBox, LengthEntry, IntEntry, RadioSet
-from ObjectUI import ObjectUI
 
+from .base  import ObjectUI
+from .geometry import FlatCAMGeometry
 
 class GerberObjectUI(ObjectUI):
     """

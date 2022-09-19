@@ -5,10 +5,11 @@ from PyQt6.QtCore import Qt, QVariant, QModelIndex, pyqtSignal, QAbstractItemMod
 from PyQt6.QtGui import QPixmap, QBrush
 from PyQt6.QtWidgets import QTreeView, QAbstractItemView
 
-from FlatCAMObj import FlatCAMExcellon, FlatCAMCNCjob, FlatCAMGeometry
 import FlatCAMApp
-
 from fcObjects.gerber import FlatCAMGerber
+from fcObjects.excellon import FlatCAMExcellon
+from fcObjects.cncjob import FlatCAMCNCjob
+from fcObjects.geometry import FlatCAMGeometry
 
 
 class KeySensitiveListView(QTreeView):
