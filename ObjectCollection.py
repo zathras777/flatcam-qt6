@@ -1,6 +1,7 @@
 import inspect  # TODO: Remove
+import re
 
-from PyQt6.QtCore import Qt, QVariant, QModelIndex, pyqtSignal, QAbstractItemModel
+from PyQt6.QtCore import Qt, QVariant, QModelIndex, pyqtSignal, QAbstractItemModel, QItemSelectionModel
 from PyQt6.QtGui import QPixmap, QBrush
 from PyQt6.QtWidgets import QTreeView, QAbstractItemView
 
@@ -422,7 +423,7 @@ class ObjectCollection(QAbstractItemModel):
         active = selections[0].internalPointer()
         group = active.parent_item
 
-        self.beginRemoveRows(self.index(group.row(), 0, Qt.QModelIndex()), active.row(), active.row())
+        self.beginRemoveRows(self.index(group.row(), 0, QModelIndex()), active.row(), active.row())
 
         group.remove_child(active)
 
@@ -477,7 +478,7 @@ class ObjectCollection(QAbstractItemModel):
         group_index = self.index(group.row(), 0, Qt.QModelIndex())
         item_index = self.index(item.row(), 0, group_index)
 
-        self.view.selectionModel().select(item_index, QtWidgets.QItemSelectionModel.Select)
+        self.view.selectionModel().select(item_index, QItemSelectionModel.Select)
 
     def set_inactive(self, name):
         """
@@ -491,10 +492,10 @@ class ObjectCollection(QAbstractItemModel):
         item = obj.item
         group = self.group_items[obj.kind]
 
-        group_index = self.index(group.row(), 0, Qt.QModelIndex())
+        group_index = self.index(group.row(), 0, QModelIndex())
         item_index = self.index(item.row(), 0, group_index)
 
-        self.view.selectionModel().select(item_index, QtWidgets.QItemSelectionModel.Deselect)
+        self.view.selectionModel().select(item_index, QItemSelectionModel.Deselect)
 
     def set_all_inactive(self):
         """
@@ -561,4 +562,4 @@ class ObjectCollection(QAbstractItemModel):
         return obj_list
 
     def update_view(self):
-        self.dataChanged.emit(Qt.QModelIndex(), Qt.QModelIndex())
+        self.dataChanged.emit(QModelIndex(), QModelIndex())

@@ -1,21 +1,27 @@
 import inspect  # TODO: For debugging only.
+import re
 
+from copy import copy
 from io import StringIO
 from PyQt6.QtCore import pyqtSignal, Qt, QObject, QTimer
 from PyQt6.QtWidgets import QTableWidgetItem, QFileDialog
-from copy import copy
+from shapely.geometry import Point
 from shapely.geometry.base import JOIN_STYLE
-
 
 from ObjectUI import *
 import FlatCAMApp
-from camlib import *
 from FlatCAMCommon import LoudDict
 from FlatCAMDraw import FlatCAMDraw
+
+from fcCamlib.excellon import Excellon
+from fcCamlib.cncjob import CNCjob
+from fcCamlib.geometry import Geometry
+
 
 # Interrupts plotting process if FlatCAMObj has been deleted
 class ObjectDeleted(Exception):
     pass
+
 
 ########################################
 ##            FlatCAMObj              ##
@@ -740,7 +746,7 @@ class FlatCAMCNCjob(FlatCAMObj, CNCjob):
 
         """
 
-        log.debug("dwell_generator()...")
+        FlatCAMApp.App.log.debug("dwell_generator()...")
 
         m3m4re = re.compile(r'^\s*[mM]0[34]')
         g4re = re.compile(r'^\s*[gG]4\s+([\d\.\+\-e]+)')
@@ -758,7 +764,7 @@ class FlatCAMCNCjob(FlatCAMObj, CNCjob):
 
             # If start spindle, buffer a G4.
             if m3m4re.search(line):
-                log.debug("Found M03/4")
+                FlatCAMApp.App.log.debug("Found M03/4")
                 bufline = "G4 P{}\n".format(self.options['dwelltime'])
             yield line
 
@@ -772,7 +778,7 @@ class FlatCAMCNCjob(FlatCAMObj, CNCjob):
         ## Post processing
         # Dwell?
         if self.options['dwell']:
-            log.debug("Will add G04!")
+            FlatCAMApp.App.log.debug("Will add G04!")
             lines = self.dwell_generator(lines)
 
         ## Write
@@ -885,6 +891,7 @@ class FlatCAMGeometry(FlatCAMObj, Geometry):
 
     def build_ui(self):
         FlatCAMObj.build_ui(self)
+        self.app.ui.showSelectedTab()
 
     def set_ui(self, ui):
         FlatCAMObj.set_ui(self, ui)

@@ -1,17 +1,19 @@
+import sys
 import tkinter
 import json
 import getopt
 import os
 import random
 import time  # Just used for debugging. Double check before removing.
+import traceback
 import webbrowser
-from contextlib import contextmanager
-from xml.dom.minidom import parseString as parse_xml_string
 
+from contextlib import contextmanager
 from PyQt6.QtCore import Qt, QObject, pyqtSignal, QTimer, QEventLoop
 from PyQt6.QtWidgets import QApplication, QLabel, QDockWidget, QFileDialog, \
     QVBoxLayout, QHBoxLayout, QPushButton, QMessageBox, QDialog
 from PyQt6.QtGui import QIcon
+from xml.dom.minidom import parseString as parse_xml_string
 
 ########################################
 ##      Imports part of FlatCAM       ##
@@ -28,9 +30,11 @@ from FlatCAMWorkerStack import WorkerStack
 from fcTools.MeasurementTool import Measurement
 from fcTools.DblSidedTool import DblSidedTool
 from multiprocessing import Pool
+from fcCamlib.gerber import Gerber, GerberParseError
+from project import dict2obj, to_dict
+
 import gc
 import tclCommands
-
 
 ########################################
 ##                App                 ##
@@ -2118,8 +2122,8 @@ class App(QObject):
                 app_obj.progress.emit(0)
                 raise IOError('Failed to open file: ' + filename)
 
-            except ParseError as e:
-                app_obj.inform.emit("[error] Failed to parse file: " + filename + ". " + e[0])
+            except GerberParseError as e:
+                app_obj.inform.emit("[error] Failed to parse file: " + filename + ". " + e)
                 app_obj.progress.emit(0)
                 self.log.error(str(e))
                 raise

@@ -5,7 +5,7 @@ from shapely.geometry import Polygon, MultiPolygon
 
 from FlatCAMObj import FlatCAMObj
 from ObjectUI import ObjectUI
-from camlib import Gerber
+from fcCamlib.gerber import Gerber
 
 from GUIElements import FCEntry, FloatEntry, FCCheckBox, \
     LengthEntry, IntEntry, RadioSet
@@ -577,7 +577,7 @@ class FlatCAMGerber(FlatCAMObj, Gerber):
             if invert:
                 if type(geom) is MultiPolygon:
                     pl = []
-                    for p in geom:
+                    for p in geom.geoms:
                         pl.append(Polygon(p.exterior.coords[::-1], p.interiors))
                     geom = MultiPolygon(pl)
                 elif type(geom) is Polygon:

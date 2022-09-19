@@ -52,9 +52,13 @@ class RadioSet(QWidget):
         log.debug("Radio toggled")
         radio = self.sender()
         # TODO - catch error if sender isn't a QRadioButton
-        if radio.isChecked():
-            self.group_toggle_fn()
-            self.activated_custom.emit()
+        try:
+            if radio.isChecked():
+                self.group_toggle_fn()
+                self.activated_custom.emit()
+        except AttributeError as e:
+            log.debug(f"Tried to treat {radio} as a QRadioButton, but it's not? {type(radio)}")
+
         return
 
     def get_value(self):
